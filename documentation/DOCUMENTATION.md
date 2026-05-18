@@ -85,6 +85,8 @@ npx hardhat test
 ```
 
 ## Repository Structure
+
+```
 .
 -> README.md
 -> code/
@@ -92,8 +94,10 @@ npx hardhat test
 -> deployment/
    -> contracts/         <- copy of contract for Hardhat
    -> test/
+      -> Token42.test.js <- 14 automated tests
    -> hardhat.config.js  <- framework config
-   -> deploy.js
-   -> package.json
+   -> deploy.js          <- deployment script
+   -> package.json       <- dependencies
 -> documentation/
-    -> DOCUMENTATION.md   <- technical doc
+   -> DOCUMENTATION.md   <- technical doc
+```

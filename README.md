@@ -30,6 +30,8 @@ Since version 0.8.0, Solidity includes automatic overflow/underflow protection.
 Hardhat is the most actively maintained Ethereum development framework (lets us write tests in js too)
 
 ## Repository Structure
+
+```
 .
 -> README.md
 -> code/
@@ -37,11 +39,13 @@ Hardhat is the most actively maintained Ethereum development framework (lets us 
 -> deployment/
    -> contracts/         <- copy of contract for Hardhat
    -> test/
+      -> Token42.test.js <- 14 automated tests
    -> hardhat.config.js  <- framework config
-   -> deploy.js
-   -> package.json
+   -> deploy.js          <- deployment script
+   -> package.json       <- dependencies
 -> documentation/
-    -> DOCUMENTATION.md   <- technical doc
+   -> DOCUMENTATION.md   <- technical doc
+```
 
 ## How to Deploy
 

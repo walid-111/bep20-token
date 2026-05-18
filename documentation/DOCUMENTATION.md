@@ -84,16 +84,16 @@ npm install
 npx hardhat test
 ```
 
-## Project structure
-tokenizer42/
-├── README.md
-├── code/
-│   └── Token42.sol
-├── deployment/
-│   ├── hardhat.config.js
-│   ├── deploy.js
-│   ├── test/
-│   │   └── Token42.test.js
-│   └── package.json
-└── documentation/
-└── DOCUMENTATION.md
+## Repository Structure
+.
+-> README.md
+-> code/
+   -> Token42.sol        <- BEP-20 smart contract
+-> deployment/
+   -> contracts/         <- copy of contract for Hardhat
+   -> test/
+   -> hardhat.config.js  <- framework config
+   -> deploy.js
+   -> package.json
+-> documentation/
+    -> DOCUMENTATION.md   <- technical doc

@@ -31,17 +31,17 @@ Hardhat is the most actively maintained Ethereum development framework (lets us 
 
 ## Repository Structure
 .
-├── README.md
-├── code/
-│   └── Token42.sol        <- BEP-20 smart contract
-├── deployment/
-│   ├── contracts/         <- copy of contract for Hardhat
-│   ├── test/
-│   ├── hardhat.config.js  <- framework config
-│   ├── deploy.js
-│   └── package.json
-└── documentation/
-    └── DOCUMENTATION.md   <- technical doc
+-> README.md
+-> code/
+   -> Token42.sol        <- BEP-20 smart contract
+-> deployment/
+   -> contracts/         <- copy of contract for Hardhat
+   -> test/
+   -> hardhat.config.js  <- framework config
+   -> deploy.js
+   -> package.json
+-> documentation/
+    -> DOCUMENTATION.md   <- technical doc
 
 ## How to Deploy
 

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+// BEP-20 standard interface : must-have functions
 interface IBEP20 {
     function totalSupply() external view returns (uint256);
     function balanceOf(address account) external view returns (uint256);
@@ -9,16 +10,19 @@ interface IBEP20 {
     function approve(address spender, uint256 amount) external returns (bool);
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
 
+    // Logs for token movements (including mint and burn) and approvals
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
+// Abstract contract used by Ownable to get the caller's address
 abstract contract Context {
     function _msgSender() internal view virtual returns (address) {
         return msg.sender;
     }
 }
 
+// Adds an owner address and onlyOwner access control
 abstract contract Ownable is Context {
     address private _owner;
 
@@ -32,6 +36,7 @@ abstract contract Ownable is Context {
         return _owner;
     }
 
+    // Require reverts the transaction with the error message if caller is not the owner
     modifier onlyOwner() {
         require(_owner == _msgSender(), "Ownable: caller is not the owner");
         _;
@@ -55,7 +60,10 @@ abstract contract Ownable is Context {
 
 contract Token42 is Context, IBEP20, Ownable {
 
+    // Tracks how many tokens each address owns
     mapping(address => uint256) private _balances;
+
+    // Tracks how many tokens each spender is allowed to use per owner
     mapping(address => mapping(address => uint256)) private _allowances;
 
     uint256 private _totalSupply;
@@ -122,8 +130,7 @@ contract Token42 is Context, IBEP20, Ownable {
         _burn(_msgSender(), amount);
     }
 
-    // Internal functions for handling transfers, minting, burning, and approvals (not exposed to external callers)
-
+    // Transfer logic
     function _transfer(address sender, address recipient, uint256 amount) internal {
         require(sender != address(0), "BEP20: transfer from the zero address");
         require(recipient != address(0), "BEP20: transfer to the zero address");

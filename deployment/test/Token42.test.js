@@ -1,3 +1,7 @@
+// Mocha:   provides describe() to group tests and it() for individual test cases
+// Chai:    provides expect() to assert values -> throws an error if assertion fails
+// Hardhat: provides a local in-memory blockchain and ethers.js to interact with it
+
 import { expect } from "chai";
 import hre from "hardhat";
 
@@ -8,9 +12,10 @@ describe("Token42", function () {
     let addr2;
     let ethers;
 
+    // fresh contract before each test
     beforeEach(async function () {
         ({ ethers } = await hre.network.getOrCreate());
-        [owner, addr1, addr2] = await ethers.getSigners();
+        [owner, addr1, addr2] = await ethers.getSigners(); // 3 fake wallets
         const Token42 = await ethers.getContractFactory("Token42");
         token = await Token42.deploy();
         await token.waitForDeployment();
@@ -30,6 +35,7 @@ describe("Token42", function () {
         });
 
         it("should mint 1,000,000 TK42 to the deployer", async function () {
+            // ethers.parseUnits() converts amounts to base units
             const expected = ethers.parseUnits("1000000", 18);
             expect(await token.totalSupply()).to.equal(expected);
             expect(await token.balanceOf(owner.address)).to.equal(expected);
@@ -43,6 +49,7 @@ describe("Token42", function () {
     describe("Transfers", function () {
         it("should transfer tokens between accounts", async function () {
             const amount = ethers.parseUnits("100", 18);
+            // token.connect(addr1) sends the next transaction from addr1 instead of owner
             await token.connect(owner).transfer(addr1.address, amount);
             expect(await token.balanceOf(addr1.address)).to.equal(amount);
         });

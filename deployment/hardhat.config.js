@@ -1,34 +1,32 @@
 import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-verify";
 import "dotenv/config";
-import hardhatMocha from "@nomicfoundation/hardhat-mocha";
-import hardhatEthers from "@nomicfoundation/hardhat-ethers";
+import hardhatVerify from "@nomicfoundation/hardhat-verify";
 
-const PRIVATE_KEY = process.env.PRIVATE_KEY || "0x0000000000000000000000000000000000000000000000000000000000000001";
+import hardhatMocha from "@nomicfoundation/hardhat-mocha"; // adds: npx hardhat test
+import hardhatEthers from "@nomicfoundation/hardhat-ethers"; // ethers on network connection
+
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "0x000...001";
 const BSCSCAN_KEY = process.env.BSCSCAN_KEY || "";
 
 export default {
     solidity: "0.8.20",
-    defaultNetwork: "node",
-    plugins: [hardhatMocha, hardhatEthers],
+    defaultNetwork: "node", // use local in-memory blockchain by default, not testnet
+    plugins: [hardhatMocha, hardhatEthers, hardhatVerify],
     networks: {
         node: { type: "edr-simulated" },
         bscTestnet: {
-            type: "http",
-            url: "https://data-seed-prebsc-1-s1.binance.org:8545",
-            chainId: 97,
-            accounts: [PRIVATE_KEY],
+            type: "http", // real external network
+            url: "https://data-seed-prebsc-1-s1.binance.org:8545", // BSC testnet RPC
+            chainId: 97, // BSC testnet ID
+            accounts: [PRIVATE_KEY], // wallet used to sign transactions
         },
     },
-    etherscan: {
-        apiKey: { bscTestnet: BSCSCAN_KEY },
-        customChains: [{
-            network: "bscTestnet",
-            chainId: 97,
-            urls: {
-                apiURL: "https://api-testnet.bscscan.com/api",
-                browserURL: "https://testnet.bscscan.com",
-            },
-        }],
+
+    // BSCScan verification config
+    verify: {
+        etherscan: {
+            apiKey: BSCSCAN_KEY,
+        },
     },
 };

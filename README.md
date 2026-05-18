@@ -1,23 +1,54 @@
-With 1 bit you can represent 2 values (0 or 1)
-With 4 bits you can represent 16 values (0 to 15)
-With 1 hex character (4 bits) you can represent 16 values : 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, e, f
-So 4 bits = 1 hex character
+# Token42 — 42 School Tokenizer Project
 
-How are adresses generated :
+## Contract
 
-256-bit random number
-        |
-        |  (this IS your private key : 64 hex chars)
-        V
-Elliptic curve multiplication with G
-        |
-        |  (produces public key : 512 bits, 128 hex chars)
-        V
-Keccak-256 hash
-        |
-        |  (produces 256 bits : 64 hex chars)
-        V
-Drop first 12 bytes, keep last 20
-        |
-        V
-Address (160 bits = 20 bytes : 40 hex chars)
+- **Network**: BNB Smart Chain Testnet (Chain ID: 97)
+- **Contract Address**: 0x50d5d36643730972080Ed6B0CCa4ed70B9078D0B
+- **Explorer**: https://testnet.bscscan.com/address/0x50d5d36643730972080Ed6B0CCa4ed70B9078D0B
+
+## Token Details
+
+Name : Token42
+Symbol : TK42
+Decimals : 18
+Initial Supply : 1,000,000 TK42
+Standard : BEP-20
+
+## Design Choices
+
+### Why BNB Smart Chain?
+Project is a partnership with BNB Chain + BSC is EVM-compatible, 
+meaning it uses the same language as Ethereum (Solidity).
+
+### Why BEP-20?
+it's the token standard on BSC (like ERC-20 on Ethereum), ensure compatibility with different tools (wallets, explorers..).
+
+### Why Solidity 0.8.20?
+Since version 0.8.0, Solidity includes automatic overflow/underflow protection.
+
+### Why Hardhat?
+Hardhat is the most actively maintained Ethereum development framework (lets us write tests in js too)
+
+## Repository Structure
+.
+├── README.md
+├── code/
+│   └── Token42.sol        <- BEP-20 smart contract
+├── deployment/
+│   ├── contracts/         <- copy of contract for Hardhat
+│   ├── test/
+│   ├── hardhat.config.js  <- framework config
+│   ├── deploy.js
+│   └── package.json
+└── documentation/
+    └── DOCUMENTATION.md   <- technical doc
+
+## How to Deploy
+
+```bash
+cd deployment
+npm install
+cp .env.example .env
+npx hardhat test
+npx hardhat run deploy.js --network bscTestnet
+```

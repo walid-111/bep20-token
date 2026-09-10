@@ -49,7 +49,7 @@ describe("Token42", function () {
     describe("Transfers", function () {
         it("should transfer tokens between accounts", async function () {
             const amount = ethers.parseUnits("100", 18);
-            // token.connect(addr1) sends the next transaction from addr1 instead of owner
+            // token.connect(owner) sends the next transaction from owner (connect(addr1) would send it from addr1)
             await token.connect(owner).transfer(addr1.address, amount);
             expect(await token.balanceOf(addr1.address)).to.equal(amount);
         });

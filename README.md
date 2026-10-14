@@ -21,7 +21,7 @@ Project is a partnership with BNB Chain + BSC is EVM-compatible,
 meaning it uses the same language as Ethereum (Solidity).
 
 ### Why BEP-20?
-it's the token standard on BSC (like ERC-20 on Ethereum), ensure compatibility with different tools (wallets, explorers..).
+It's the token standard on BSC (like ERC-20 on Ethereum), ensure compatibility with different tools (wallets, explorers..).
 
 ### Why Solidity 0.8.20?
 Since version 0.8.0, Solidity includes automatic overflow/underflow protection.
@@ -49,10 +49,24 @@ Hardhat is the most actively maintained Ethereum development framework (lets us 
 
 ## How to Deploy
 
+Needs Node 22+ (Hardhat 3 doesn't work on older versions).
+
 ```bash
 cd deployment
 npm install
 cp .env.example .env
 npx hardhat test
 npx hardhat run deploy.js --network bscTestnet
+```
+
+In `.env`:
+- `PRIVATE_KEY`: private key of the wallet that deploys (use a test wallet, it needs some testnet BNB from a faucet)
+- `BSCSCAN_KEY`: API key from BSCScan, only needed to verify the contract
+
+Tests don't need the `.env`, they run on a local Hardhat chain.
+
+To verify the contract on BSCScan after deploying:
+
+```bash
+npx hardhat verify --network bscTestnet <contract_address>
 ```

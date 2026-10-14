@@ -50,7 +50,7 @@ This means 1 TK42 is stored internally as:
 
 - External functions can be called from outside the contract (e.g. by users or other contracts) and are part of the public API.
 - Internal functions can only be called from within the contract itself and are used for code organization and reuse. They are not accessible from outside.
-What we do is we re-implement the internal `_transfer` function to add our custom logic (like blocking transfers to address(0)) while still using the standard ERC20 transfer mechanism.
+In Token42, the public functions (`transfer`, `transferFrom`, `mint`, `burn`) do the access checks and then call internal ones (`_transfer`, `_mint`, `_burn`, `_approve`) that hold the actual logic, like blocking transfers to address(0) and checking balances.
 
 ## Security
 

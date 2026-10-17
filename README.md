@@ -1,4 +1,6 @@
-# Token42 — 42 School Tokenizer Project
+# bep20-token
+
+Token42 (TK42), a BEP-20 token deployed on BNB Smart Chain Testnet, with Hardhat tests and a deploy script.
 
 ## Contract
 
@@ -17,8 +19,8 @@ Standard : BEP-20
 ## Design Choices
 
 ### Why BNB Smart Chain?
-Project is a partnership with BNB Chain + BSC is EVM-compatible, 
-meaning it uses the same language as Ethereum (Solidity).
+BSC is EVM-compatible, meaning it uses the same language as Ethereum (Solidity),
+and the testnet is fast and free to use with faucet BNB.
 
 ### Why BEP-20?
 It's the token standard on BSC (like ERC-20 on Ethereum), ensure compatibility with different tools (wallets, explorers..).

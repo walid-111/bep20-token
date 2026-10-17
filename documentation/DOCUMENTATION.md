@@ -2,7 +2,7 @@
 
 ## What is Token42?
 
-Token42 (TK42) is a token deployed on BNB Smart Chain Testnet as part of the 42 school Tokenizer project.
+Token42 (TK42) is a token deployed on BNB Smart Chain Testnet.
 A token is a program living on a blockchain that tracks who owns what numbers.
 
 ## Token Details
